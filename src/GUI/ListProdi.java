@@ -28,13 +28,10 @@ public class ListProdi extends javax.swing.JFrame {
     private void initComponents() {
 
         DetailProdi = new javax.swing.JPanel();
-        desfieldArea = new javax.swing.JScrollPane();
-        jTextArea1 = new javax.swing.JTextArea();
-        jLabeljudul = new javax.swing.JLabel();
-        jLabeldeskripsi = new javax.swing.JLabel();
+        tabelProdi = new javax.swing.JScrollPane();
+        TBdos = new javax.swing.JTable();
         setujuButton = new javax.swing.JButton();
         kembaliButton = new javax.swing.JButton();
-        jTextField1 = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         BACKGROUND = new javax.swing.JLabel();
 
@@ -43,20 +40,22 @@ public class ListProdi extends javax.swing.JFrame {
 
         DetailProdi.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jTextArea1.setColumns(20);
-        jTextArea1.setRows(5);
-        desfieldArea.setViewportView(jTextArea1);
+        TBdos.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
 
-        DetailProdi.add(desfieldArea, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 240, 360, 120));
+            },
+            new String [] {
+                "Nim", "Nama", "judul", "Deskripsi", "ket.", "Acc Dosen", "Ket.", "Acc Prodi", "Ket."
+            }
+        ));
+        TBdos.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                TBdosMouseClicked(evt);
+            }
+        });
+        tabelProdi.setViewportView(TBdos);
 
-        jLabeljudul.setBackground(new java.awt.Color(0, 0, 0));
-        jLabeljudul.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jLabeljudul.setText("Judul                         :");
-        DetailProdi.add(jLabeljudul, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 200, -1, -1));
-
-        jLabeldeskripsi.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jLabeldeskripsi.setText("Deskripsi                   :");
-        DetailProdi.add(jLabeldeskripsi, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 240, -1, -1));
+        DetailProdi.add(tabelProdi, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 170, 600, 160));
 
         setujuButton.setText("Setuju");
         setujuButton.addActionListener(new java.awt.event.ActionListener() {
@@ -68,10 +67,9 @@ public class ListProdi extends javax.swing.JFrame {
 
         kembaliButton.setText("Kembali");
         DetailProdi.add(kembaliButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 370, 80, -1));
-        DetailProdi.add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 200, 360, 30));
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
-        jLabel2.setText("Detail Tugas Akhir Mahasiswa");
+        jLabel2.setText("Daftar Tugas Akhir Mahasiswa");
         DetailProdi.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 130, -1, -1));
 
         BACKGROUND.setFont(new java.awt.Font("Malgun Gothic", 1, 14)); // NOI18N
@@ -86,6 +84,10 @@ public class ListProdi extends javax.swing.JFrame {
     private void setujuButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_setujuButtonActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_setujuButtonActionPerformed
+
+    private void TBdosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TBdosMouseClicked
+   
+    }//GEN-LAST:event_TBdosMouseClicked
 
     /**
      * @param args the command line arguments
@@ -125,13 +127,10 @@ public class ListProdi extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel BACKGROUND;
     private javax.swing.JPanel DetailProdi;
-    private javax.swing.JScrollPane desfieldArea;
+    private javax.swing.JTable TBdos;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabeldeskripsi;
-    private javax.swing.JLabel jLabeljudul;
-    private javax.swing.JTextArea jTextArea1;
-    private javax.swing.JTextField jTextField1;
     private javax.swing.JButton kembaliButton;
     private javax.swing.JButton setujuButton;
+    private javax.swing.JScrollPane tabelProdi;
     // End of variables declaration//GEN-END:variables
 }

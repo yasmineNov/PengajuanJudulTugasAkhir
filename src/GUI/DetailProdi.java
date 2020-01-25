@@ -29,8 +29,6 @@ public class DetailProdi extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
         pengajuan = new javax.swing.JPanel();
-        namaDosen = new javax.swing.JComboBox<>();
-        jLabel1 = new javax.swing.JLabel();
         judulnama = new javax.swing.JTextField();
         desfieldArea = new javax.swing.JScrollPane();
         deskripsides = new javax.swing.JTextArea();
@@ -45,29 +43,23 @@ public class DetailProdi extends javax.swing.JFrame {
 
         pengajuan.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        pengajuan.add(namaDosen, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 170, 400, -1));
-
-        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jLabel1.setText("Dosen Pembimbing :");
-        pengajuan.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 170, -1, -1));
-
         judulnama.setText(" ");
         judulnama.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 judulnamaActionPerformed(evt);
             }
         });
-        pengajuan.add(judulnama, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 200, 400, -1));
+        pengajuan.add(judulnama, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 220, 400, -1));
 
         deskripsides.setColumns(20);
         deskripsides.setRows(5);
         desfieldArea.setViewportView(deskripsides);
 
-        pengajuan.add(desfieldArea, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 230, 400, 120));
+        pengajuan.add(desfieldArea, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 250, 400, 120));
 
         jLabeltopjudul.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
-        jLabeltopjudul.setText("Pengajuan Judul Mahasiswa");
-        pengajuan.add(jLabeltopjudul, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 130, -1, -1));
+        jLabeltopjudul.setText("Detail Pengajuan Judul Mahasiswa");
+        pengajuan.add(jLabeltopjudul, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 130, -1, -1));
 
         ajukanButton.setBackground(new java.awt.Color(255, 204, 0));
         ajukanButton.setText("Ajukan");
@@ -90,11 +82,11 @@ public class DetailProdi extends javax.swing.JFrame {
         jLabeljudul.setBackground(new java.awt.Color(0, 0, 0));
         jLabeljudul.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabeljudul.setText("Judul                         :");
-        pengajuan.add(jLabeljudul, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 200, -1, -1));
+        pengajuan.add(jLabeljudul, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 220, -1, -1));
 
         jLabeldeskripsi.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabeldeskripsi.setText("Deskripsi                   :");
-        pengajuan.add(jLabeldeskripsi, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 230, -1, -1));
+        pengajuan.add(jLabeldeskripsi, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 250, -1, -1));
 
         background.setIcon(new javax.swing.ImageIcon("C:\\Users\\yasmine\\Pictures\\backlist.png")); // NOI18N
         pengajuan.add(background, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 680, 460));
@@ -187,13 +179,11 @@ public class DetailProdi extends javax.swing.JFrame {
     private javax.swing.JLabel background;
     private javax.swing.JScrollPane desfieldArea;
     private javax.swing.JTextArea deskripsides;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabeldeskripsi;
     private javax.swing.JLabel jLabeljudul;
     private javax.swing.JLabel jLabeltopjudul;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JTextField judulnama;
-    private javax.swing.JComboBox<String> namaDosen;
     private javax.swing.JPanel pengajuan;
     // End of variables declaration//GEN-END:variables
 }
