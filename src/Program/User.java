@@ -32,6 +32,18 @@ public class User {
       // TODO: implement
    }
    
+   public User(String nama, String nik, String jenisKelamin, String tanggalLahir, String alamat, String noTelp, String email, String agama) {
+      // TODO: implement
+       setNama(nama);
+       setNik(nik);
+       setJenisKelamin(jenisKelamin);
+       setTanggalLahir(tanggalLahir);
+       setAlamat(alamat);
+       setNoTelp(noTelp);
+       setEmail(email);
+       setAgama(agama);
+   }
+   
    /** @pdOid fb86b414-0374-40fc-a4ac-020fc2330cd3 */
    public String getNama() {
       return nama;
