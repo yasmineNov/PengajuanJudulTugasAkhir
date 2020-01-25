@@ -1,6 +1,10 @@
 package GUI;
-public class DetailMhs extends javax.swing.JFrame {
 
+import Program.*;
+import java.util.Date;
+
+public class DetailMhs extends javax.swing.JFrame {
+    Mahasiswa mahasiswa;
     /**
      * Creates new form DetailMhs
      */
@@ -8,6 +12,11 @@ public class DetailMhs extends javax.swing.JFrame {
         initComponents();
     }
 
+    public DetailMhs(Mahasiswa maha) {
+        initComponents();
+        mahasiswa = maha;
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -42,11 +51,6 @@ public class DetailMhs extends javax.swing.JFrame {
         pengajuan.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 180, -1, -1));
 
         judulnama.setText(" ");
-        judulnama.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                judulnamaActionPerformed(evt);
-            }
-        });
         pengajuan.add(judulnama, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 210, 400, -1));
 
         deskripsides.setColumns(20);
@@ -85,8 +89,6 @@ public class DetailMhs extends javax.swing.JFrame {
         jLabeldeskripsi.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabeldeskripsi.setText("Deskripsi                   :");
         pengajuan.add(jLabeldeskripsi, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 240, -1, -1));
-
-        background.setIcon(new javax.swing.ImageIcon("C:\\Users\\yasmine\\Pictures\\backlist.png")); // NOI18N
         pengajuan.add(background, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 680, 460));
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -124,12 +126,9 @@ public class DetailMhs extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void judulnamaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_judulnamaActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_judulnamaActionPerformed
-
     private void ajukanButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ajukanButtonActionPerformed
-
+        Judul jud = new Judul(mahasiswa.getNim(), judulnama.getText(), deskripsides.getText(), new Date());
+        jud.insertToDatabase();
     }//GEN-LAST:event_ajukanButtonActionPerformed
 
     private void backButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backButtonActionPerformed

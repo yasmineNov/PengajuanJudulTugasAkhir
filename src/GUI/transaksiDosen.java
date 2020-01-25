@@ -6,17 +6,36 @@
 
 package GUI;
 
+import Program.*;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.StringTokenizer;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author yasmine
  */
 public class transaksiDosen extends javax.swing.JFrame {
-
+    private login logi;
+    private Dospem dos;
+    private Prodi pro;
     /** Creates new form transaksiDosen */
     public transaksiDosen() {
         initComponents();
     }
 
+    public transaksiDosen(login log) {
+        initComponents();
+        logi = log;
+        getJudul();
+        setujubutton.setVisible(false);
+        if(logi.getTypeLogin().equals("Dosen"))
+            dos = new Dospem().getSingleDatabase(logi.getIdLogin());
+        else
+            pro = new Prodi().getSingleDatabase(Integer.parseInt(logi.getIdLogin()));
+    }
+    
     /** This method is called from within the constructor to
      * initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is
@@ -44,7 +63,7 @@ public class transaksiDosen extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Nim", "Nama", "judul", "Deskripsi", "tgl. Pengajuan", "Acc Dosen", "Ket.", "Acc Prodi", "Ket."
+                "Nim", "Nama", "id - judul", "Deskripsi", "tgl. Pengajuan", "Acc Dosen", "Ket.", "Acc Prodi", "Ket."
             }
         ));
         TBdos.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -72,7 +91,6 @@ public class transaksiDosen extends javax.swing.JFrame {
         Detail.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 140, -1, -1));
 
         BACKGROUND.setFont(new java.awt.Font("Malgun Gothic", 1, 14)); // NOI18N
-        BACKGROUND.setIcon(new javax.swing.ImageIcon("C:\\Users\\yasmine\\Pictures\\backlist.png")); // NOI18N
         Detail.add(BACKGROUND, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -91,11 +109,25 @@ public class transaksiDosen extends javax.swing.JFrame {
 
     private void setujubuttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_setujubuttonActionPerformed
         // TODO add your handling code here:
+        String teks = TBdos.getValueAt(TBdos.getSelectedRow(), 2).toString();
+        StringTokenizer token = new StringTokenizer(teks, " - ");
+        if(logi.getTypeLogin().equals("Dosen")){
+            KeputusanDospem Kd = new KeputusanDospem(true);
+            Kd.insertToDatabase();
+        }
+        else{
+            KeputusanProdi Kp = new KeputusanProdi(true);
+            Kp.insertToDatabase();
+        }
     }//GEN-LAST:event_setujubuttonActionPerformed
 
     private void TBdosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TBdosMouseClicked
         // TODO add your handling code here:
-
+        if(TBdos.getValueAt(TBdos.getSelectedRow(), (logi.getTypeLogin().equals("Dosen"))? 5 : 7) != null){
+            setujubutton.setVisible(false);
+        }
+        else
+            setujubutton.setVisible(true);
     }//GEN-LAST:event_TBdosMouseClicked
 
     /**
@@ -132,7 +164,52 @@ public class transaksiDosen extends javax.swing.JFrame {
             }
         });
     }
-
+    public void getJudul(){
+        DefaultTableModel model = (DefaultTableModel) TBdos.getModel();
+        model.setRowCount(0);
+        Object[] atribut = new Object[7];
+        ArrayList<Judul> listJudul = new Judul().getAllDatabase();
+        Iterator<Judul> tiapJudul = listJudul.iterator();
+        while(tiapJudul.hasNext()){
+            Judul jud = tiapJudul.next();
+            
+            KeputusanDospem Kd = new KeputusanDospem();
+            ArrayList<KeputusanDospem> listKeputusanDospem = new KeputusanDospem().getAllDatabase();
+            Iterator<KeputusanDospem> tiapKeputusanDospem = listKeputusanDospem.iterator();
+            while(tiapKeputusanDospem.hasNext()){
+                KeputusanDospem KdTemp = tiapKeputusanDospem.next();
+                if(jud.getIdJudul() == KdTemp.putusanDosen.getIdJudul()){
+                    Kd = KdTemp;
+                    break;
+                }
+            }
+            
+            KeputusanProdi Kp = new KeputusanProdi();
+            ArrayList<KeputusanProdi> listKeputusanProdi = new KeputusanProdi().getAllDatabase();
+            Iterator<KeputusanProdi> tiapKeputusanProdi = listKeputusanProdi.iterator();
+            while(tiapKeputusanProdi.hasNext()){
+                KeputusanProdi KpTemp = tiapKeputusanProdi.next();
+                if(jud.getIdJudul() == KpTemp.putusanJdl.getIdJudul()){
+                    Kp = KpTemp;
+                    break;
+                }
+            }
+            
+            atribut[0] = jud.mahasiswadalamtugas.getNim();
+            atribut[1] = jud.mahasiswadalamtugas.getNama();
+            atribut[2] = jud.getIdJudul()+ " - " + jud.getNamaJudul();
+            atribut[3] = jud.getDeskripsi();
+            atribut[4] = jud.getTglPengajuan();
+            atribut[5] = Kd.getStatusDospem();
+            atribut[6] = Kd.getTglAccDosen();
+            atribut[7] = Kp.getStatusProdi();
+            atribut[8] = Kp.getTglAccProdi();
+           
+            model.addRow(atribut);
+        }
+        TBdos.setModel(model);
+    }
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel BACKGROUND;
     private javax.swing.JPanel Detail;

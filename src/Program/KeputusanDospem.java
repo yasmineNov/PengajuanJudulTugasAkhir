@@ -19,8 +19,18 @@ public class KeputusanDospem {
    private java.lang.Boolean statusDospem;
      /** @pdOid e05fdae5-adca-4a70-b2cb-7ec38ed19cbf */
    private Date tglAccDosen;
-
-    public Date getTglAccDosen() {
+   
+   public KeputusanDospem(){
+       
+   }
+   
+   public KeputusanDospem(Boolean statusDospem){
+       setIdKeputusanDospem(getAllDatabase().size() + 1);
+       setStatusDospem(statusDospem);
+       setTglAccDosen(new Date());
+   }
+   
+   public Date getTglAccDosen() {
         return tglAccDosen;
     }
 

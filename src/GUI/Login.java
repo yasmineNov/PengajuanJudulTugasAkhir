@@ -9,6 +9,7 @@ import javax.swing.JOptionPane;
 import Program.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import Program.*;
 
 public class Login extends javax.swing.JFrame {
 
@@ -83,20 +84,19 @@ public class Login extends javax.swing.JFrame {
                     switch(log.getTypeLogin()){
                         case "Dosen" :
                         {
-                            new transaksiDosen().setVisible(true);
+                            new transaksiDosen(log).setVisible(true);
                             break;
                         }
                         case "Prodi" :
                         {
-                            
+                            new transaksiDosen(log).setVisible(true);
                             break;
                         }
                         case "Mahasiswa" :
                         {
-                            new DetailMhs().setVisible(true);
+                            new DetailMhs(new Mahasiswa().getSingleDatabase(log.getIdLogin())).setVisible(true);
                             break;
                         }
-                        
                     }
                     setVisible(false);
                 }

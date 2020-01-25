@@ -3,13 +3,16 @@ package GUI;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import Program.*;
+import java.util.ArrayList;
+import java.util.Iterator;
+import javax.swing.table.DefaultTableModel;
 
 
 public class PengajuanMahasiswa extends javax.swing.JFrame {
 
     public PengajuanMahasiswa() {
         initComponents();
-  
+        getJudul();
     }
 
     /**
@@ -65,12 +68,25 @@ public class PengajuanMahasiswa extends javax.swing.JFrame {
             new String [] {
                 "judul", "Deskripsi", "tgl. Pengajuan", "Acc Dosen", "Ket.", "Acc Prodi", "Ket."
             }
-        ));
+        ) {
+            Class[] types = new Class [] {
+                java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Boolean.class, java.lang.Object.class, java.lang.Boolean.class, java.lang.Object.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false, true, true, false, false, true
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         jScrollPane1.setViewportView(tabelJudul);
 
         listMhs.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 150, 590, 230));
-
-        jLabel1.setIcon(new javax.swing.ImageIcon("C:\\Users\\yasmine\\Pictures\\backlist.png")); // NOI18N
         listMhs.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 720, 460));
 
         getContentPane().add(listMhs, new org.netbeans.lib.awtextra.AbsoluteConstraints(4, 2, 680, 450));
@@ -98,6 +114,49 @@ public class PengajuanMahasiswa extends javax.swing.JFrame {
         });
     }
 
+    public void getJudul(){
+        DefaultTableModel model = (DefaultTableModel) tabelJudul.getModel();
+        model.setRowCount(0);
+        Object[] atribut = new Object[7];
+        ArrayList<Judul> listJudul = new Judul().getAllDatabase();
+        Iterator<Judul> tiapJudul = listJudul.iterator();
+        while(tiapJudul.hasNext()){
+            Judul jud = tiapJudul.next();
+            
+            KeputusanDospem Kd = new KeputusanDospem();
+            ArrayList<KeputusanDospem> listKeputusanDospem = new KeputusanDospem().getAllDatabase();
+            Iterator<KeputusanDospem> tiapKeputusanDospem = listKeputusanDospem.iterator();
+            while(tiapKeputusanDospem.hasNext()){
+                KeputusanDospem KdTemp = tiapKeputusanDospem.next();
+                if(jud.getIdJudul() == KdTemp.putusanDosen.getIdJudul()){
+                    Kd = KdTemp;
+                    break;
+                }
+            }
+            
+            KeputusanProdi Kp = new KeputusanProdi();
+            ArrayList<KeputusanProdi> listKeputusanProdi = new KeputusanProdi().getAllDatabase();
+            Iterator<KeputusanProdi> tiapKeputusanProdi = listKeputusanProdi.iterator();
+            while(tiapKeputusanProdi.hasNext()){
+                KeputusanProdi KpTemp = tiapKeputusanProdi.next();
+                if(jud.getIdJudul() == KpTemp.putusanJdl.getIdJudul()){
+                    Kp = KpTemp;
+                    break;
+                }
+            }
+            
+            atribut[0] = jud.getNamaJudul();
+            atribut[1] = jud.getDeskripsi();
+            atribut[2] = jud.getTglPengajuan();
+            atribut[3] = Kd.getStatusDospem();
+            atribut[4] = Kd.getTglAccDosen();
+            atribut[5] = Kp.getStatusProdi();
+            atribut[6] = Kp.getTglAccProdi();
+            
+            model.addRow(atribut);
+        }
+        tabelJudul.setModel(model);
+    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton backto;
     private javax.swing.JLabel jLabel1;

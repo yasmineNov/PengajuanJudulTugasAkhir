@@ -19,6 +19,16 @@ public class KeputusanProdi {
    private java.lang.Boolean statusProdi;
    private Date tglAccProdi;
 
+   public KeputusanProdi(){
+       
+   }
+   
+   public KeputusanProdi(Boolean statusDospem){
+       setIdKeputusanProdi(getAllDatabase().size() + 1);
+       setStatusProdi(statusDospem);
+       setTglAccProdi(new Date());
+   }
+   
     public Date getTglAccProdi() {
         return tglAccProdi;
     }

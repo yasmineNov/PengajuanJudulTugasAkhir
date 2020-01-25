@@ -5,6 +5,8 @@
  */
 package GUI;
 
+import Program.*;
+
 /**
  *
  * @author yasmine
@@ -18,6 +20,10 @@ public class ListProdi extends javax.swing.JFrame {
         initComponents();
     }
 
+    public ListProdi(Prodi prodi) {
+        initComponents();
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
