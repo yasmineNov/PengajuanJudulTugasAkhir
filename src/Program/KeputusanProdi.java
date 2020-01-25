@@ -6,6 +6,9 @@ package Program;
  * Purpose: Defines the Class KeputusanProdi
  ***********************************************************************/
 
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.*;
 
 /** @pdOid 350e12d0-28bc-4bb2-98b4-4e84a8cff0e6 */
@@ -14,6 +17,15 @@ public class KeputusanProdi {
    private int idKeputusanProdi;
    /** @pdOid 1175fdd5-6e99-4bd7-9f85-b32e294b099d */
    private java.lang.Boolean statusProdi;
+   private Date tglAccProdi;
+
+    public Date getTglAccProdi() {
+        return tglAccProdi;
+    }
+
+    public void setTglAccProdi(Date tglAccProdi) {
+        this.tglAccProdi = tglAccProdi;
+    }
    
    /** @pdRoleInfo migr=no name=Prodi assc=kepProdi mult=1..1 */
    public Prodi prodi;
@@ -41,5 +53,66 @@ public class KeputusanProdi {
    public java.lang.Boolean getStatusProdi() {
       return statusProdi;
    }
+   
+   public ArrayList<KeputusanProdi> getAllDatabase(){
+        ArrayList<KeputusanProdi> list = new ArrayList<>();
+       try{
+           String query = "SELECT * FROM keputusanprodi";
+           PreparedStatement statement = DatabaseMySQL.getConnection().prepareStatement(query);
+           ResultSet rs = statement.executeQuery();
+           while(rs.next()){
+               KeputusanProdi Kp = new KeputusanProdi();
+               Kp.setIdKeputusanProdi(rs.getInt("idKeputusanProdi"));
+               Kp.prodi = new Prodi().getSingleDatabase(rs.getInt("idProdi"));
+               Kp.putusanJdl = new Judul().getSingleDatabase(rs.getInt("idJudul"));
+               Kp.setStatusProdi(rs.getBoolean("statusProdi"));
+               Kp.setTglAccProdi(rs.getDate("tglAccProdi"));
 
+               list.add(Kp);
+           }
+           statement.close();
+           rs.close();
+       }
+       catch(SQLException e){
+       }
+       return list;
+   }
+   
+    public KeputusanProdi getSingleDatabase(int kunci) {
+        KeputusanProdi Kp = new KeputusanProdi();
+        String query = "SELECT * FROM keputusanprodi WHERE idKeputusanProdi = (?)";
+        try {
+            PreparedStatement statement = DatabaseMySQL.getConnection().prepareStatement(query);
+            statement.setInt(1, kunci);
+            ResultSet rs = statement.executeQuery();
+
+            if (rs.next()) {
+                Kp.setIdKeputusanProdi(rs.getInt("idKeputusanProdi"));
+                Kp.prodi = new Prodi().getSingleDatabase(rs.getInt("idProdi"));
+                Kp.putusanJdl = new Judul().getSingleDatabase(rs.getInt("idJudul"));
+                Kp.setStatusProdi(rs.getBoolean("statusProdi"));
+               Kp.setTglAccProdi(rs.getDate("tglAccProdi"));
+            }
+            statement.close();
+            rs.close();
+        } catch (SQLException e) {
+        }
+        return Kp;
+    }
+    
+    public void insertToDatabase(){
+       try{
+           String query = "INSERT INTO keputusanprodi VALUES (?, ?, ?, ?, ?)";
+           PreparedStatement statement = DatabaseMySQL.getConnection().prepareStatement(query);
+           statement.setInt(1, getIdKeputusanProdi());
+           statement.setInt(2, prodi.getIdProdi());           
+           statement.setInt(3, putusanJdl.getIdJudul());           
+           statement.setBoolean(4, getStatusProdi());
+           statement.setDate(5, (java.sql.Date) getTglAccProdi());
+           statement.execute();
+           statement.close();
+       }
+       catch(SQLException e){
+       }
+   }
 }

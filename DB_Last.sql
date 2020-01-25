@@ -54,6 +54,7 @@ create table KeputusanDospem
    npp                  varchar(254) not null,
    idJudul              int not null,
    statusDospem         bool,
+   tglAccDosen		Date,
    primary key (idKeputusanDospem)
 );
 
@@ -63,8 +64,10 @@ create table KeputusanDospem
 create table KeputusanProdi
 (
    idKeputusanProdi     int not null,
+   idProdi              int not null,
    idJudul              int not null,
    statusProdi          bool,
+   tglAccProdi		Date,
    primary key (idKeputusanProdi)
 );
 
@@ -92,7 +95,6 @@ create table Mahasiswa
 create table Prodi
 (
    idProdi              int not null,
-   idKeputusanProdi     int not null,
    namaProdi            varchar(254),
    primary key (idProdi)
 );
@@ -109,9 +111,18 @@ alter table KeputusanDospem add constraint FK_judulAccDosen foreign key (idJudul
 alter table KeputusanProdi add constraint FK_putusanJudul foreign key (idJudul)
       references Judul (idJudul) on delete restrict on update restrict;
 
+alter table KeputusanProdi add constraint FK_accProdi foreign key (idProdi)
+      references Prodi (idProdi) on delete restrict on update restrict;
+
 alter table Mahasiswa add constraint FK_mhsToProdi foreign key (idProdi)
       references Prodi (idProdi) on delete restrict on update restrict;
 
-alter table Prodi add constraint FK_kepProdi foreign key (idKeputusanProdi)
-      references KeputusanProdi (idKeputusanProdi) on delete restrict on update restrict;
-
+/*==============================================================*/
+/* Table: Login                                                 */
+/*==============================================================*/
+create table Login
+(
+   idLogin              varchar(254) not null,
+   Password            varchar(254),
+   primary key (idLogin)
+);

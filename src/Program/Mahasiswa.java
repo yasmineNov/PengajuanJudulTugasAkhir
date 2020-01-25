@@ -24,6 +24,13 @@ public class Mahasiswa extends User {
       // TODO: implement
    }
    
+   public Mahasiswa(String nama, String nik, String jenisKelamin, String tanggalLahir, String alamat, String noTelp, String email, String agama, String nim, int idProdi) {
+      // TODO: implement
+      super(nama, nik, jenisKelamin, tanggalLahir, alamat, noTelp, email, agama);
+       setNim(nim);
+       mhsToProdi = new Prodi().getSingleDatabase(idProdi);
+   }
+   
    /** @param newNim
     * @pdOid 9fe59fe6-2b2a-45cd-84f8-cb322dda8c66 */
    public void setNim(String newNim) {
@@ -45,7 +52,7 @@ public class Mahasiswa extends User {
            while(rs.next()){
                Mahasiswa maha = new Mahasiswa();
                maha.setNim(rs.getString("nim"));
-               maha.mhsToProdi = new Prodi().getSingleDatabase(rs.getString("idProdi"));
+               maha.mhsToProdi = new Prodi().getSingleDatabase(rs.getInt("idProdi"));
                maha.setNama(rs.getString("nama"));
                maha.setNik(rs.getString("nik"));
                maha.setJenisKelamin(rs.getString("jenisKelamin"));
@@ -74,10 +81,7 @@ public class Mahasiswa extends User {
            ResultSet rs = statement.executeQuery();
            if(rs.next()){
                maha.setNim(rs.getString("nim"));
-               if (rs.getString("idProdi") !=null){
-                   maha.mhsToProdi = new Prodi().getSingleDatabase(rs.getString("idProdi"));
-               }
-               maha.mhsToProdi = new Prodi().getSingleDatabase(rs.getString("idProdi"));
+               maha.mhsToProdi = new Prodi().getSingleDatabase(rs.getInt("idProdi"));
                maha.setNama(rs.getString("nama"));
                maha.setNik(rs.getString("nik"));
                maha.setJenisKelamin(rs.getString("jenisKelamin"));

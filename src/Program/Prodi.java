@@ -24,6 +24,12 @@ public class Prodi {
       // TODO: implement
    }
    
+   public Prodi(int idProdi, String namaProdi) {
+      // TODO: implement
+       setIdProdi(idProdi);
+       setNamaProdi(namaProdi);
+   }
+   
    /** @pdOid f1ed3324-c351-40b2-a576-e011ec0325d1 */
    public int getIdProdi() {
       return idProdi;
@@ -88,12 +94,12 @@ public class Prodi {
        return pro;
    }
 
-   public Prodi getSingleDatabase(String kunci){
+   public Prodi getSingleDatabase(int kunci){
        Prodi pro = new Prodi();
        String query = "SELECT * FROM prodi WHERE idProdi = (?)";
        try{
            PreparedStatement statement = DatabaseMySQL.getConnection().prepareStatement(query);
-           statement.setString(1, kunci);
+           statement.setInt(1, kunci);
            ResultSet rs = statement.executeQuery();
 
            if(rs.next()){

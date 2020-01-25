@@ -6,6 +6,9 @@ package Program;
  * Purpose: Defines the Class KeputusanDospem
  ***********************************************************************/
 
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.*;
 
 /** @pdOid 0d512e64-d959-4bd1-a4e5-0fd42cd7ecaf */
@@ -16,6 +19,14 @@ public class KeputusanDospem {
    private java.lang.Boolean statusDospem;
      /** @pdOid e05fdae5-adca-4a70-b2cb-7ec38ed19cbf */
    private Date tglAccDosen;
+
+    public Date getTglAccDosen() {
+        return tglAccDosen;
+    }
+
+    public void setTglAccDosen(Date tglAccDosen) {
+        this.tglAccDosen = tglAccDosen;
+    }
    
    /** @pdRoleInfo migr=no name=Judul assc=judulAccDosen mult=1..1 side=A */
    public Judul putusanDosen;
@@ -44,4 +55,65 @@ public class KeputusanDospem {
       return statusDospem;
    }
 
+   public ArrayList<KeputusanDospem> getAllDatabase(){
+        ArrayList<KeputusanDospem> list = new ArrayList<>();
+       try{
+           String query = "SELECT * FROM keputusandospem";
+           PreparedStatement statement = DatabaseMySQL.getConnection().prepareStatement(query);
+           ResultSet rs = statement.executeQuery();
+           while(rs.next()){
+               KeputusanDospem Kd = new KeputusanDospem();
+               Kd.setIdKeputusanDospem(rs.getInt("idKeputusanDospem"));
+               Kd.dospem = new Dospem().getSingleDatabase(rs.getString("npp"));
+               Kd.putusanDosen = new Judul().getSingleDatabase(rs.getInt("idJudul"));
+               Kd.setStatusDospem(rs.getBoolean("statusDospem"));
+               Kd.setTglAccDosen(rs.getDate("tglAccDosen"));
+
+               list.add(Kd);
+           }
+           statement.close();
+           rs.close();
+       }
+       catch(SQLException e){
+       }
+       return list;
+   }
+   
+    public KeputusanDospem getSingleDatabase(int kunci) {
+        KeputusanDospem Kd = new KeputusanDospem();
+        String query = "SELECT * FROM keputusandospem WHERE idKeputusanDospem = (?)";
+        try {
+            PreparedStatement statement = DatabaseMySQL.getConnection().prepareStatement(query);
+            statement.setInt(1, kunci);
+            ResultSet rs = statement.executeQuery();
+
+            if (rs.next()) {
+                Kd.setIdKeputusanDospem(rs.getInt("idKeputusanDospem"));
+                Kd.dospem = new Dospem().getSingleDatabase(rs.getString("npp"));
+                Kd.putusanDosen = new Judul().getSingleDatabase(rs.getInt("idJudul"));
+                Kd.setStatusDospem(rs.getBoolean("statusDospem"));
+                Kd.setTglAccDosen(rs.getDate("tglAccDosen"));
+            }
+            statement.close();
+            rs.close();
+        } catch (SQLException e) {
+        }
+        return Kd;
+    }
+    
+    public void insertToDatabase(){
+       try{
+           String query = "INSERT INTO keputusandospem VALUES (?, ?, ?, ?, ?)";
+           PreparedStatement statement = DatabaseMySQL.getConnection().prepareStatement(query);
+           statement.setInt(1, getIdKeputusanDospem());
+           statement.setString(2, dospem.getNpp());           
+           statement.setInt(3, putusanDosen.getIdJudul());           
+           statement.setBoolean(4, getStatusDospem());
+           statement.setDate(5, (java.sql.Date) getTglAccDosen());
+           statement.execute();
+           statement.close();
+       }
+       catch(SQLException e){
+       }
+   }
 }
