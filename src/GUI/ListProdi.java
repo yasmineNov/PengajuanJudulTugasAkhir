@@ -41,9 +41,6 @@ public class ListProdi extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
         jButton3 = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        tabelJudul = new javax.swing.JTable();
-        jLabel9 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
         tabelJudul1 = new javax.swing.JTable();
 
@@ -89,53 +86,37 @@ public class ListProdi extends javax.swing.JFrame {
 
         getContentPane().add(DetailProdi, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 0, 0));
 
+        ListProdi.setBackground(new java.awt.Color(153, 204, 255));
         ListProdi.setLayout(null);
 
         jLabel5.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
-        jLabel5.setText("List Prodi");
+        jLabel5.setText("Daftar Pengajuan Judul Mahasiswa");
         jLabel5.setToolTipText("");
         ListProdi.add(jLabel5);
-        jLabel5.setBounds(300, 120, 130, 30);
+        jLabel5.setBounds(140, 30, 440, 30);
 
         jButton3.setText("Simpan");
         ListProdi.add(jButton3);
-        jButton3.setBounds(570, 380, 73, 23);
+        jButton3.setBounds(580, 330, 73, 23);
 
         jButton4.setText("Kembali");
         ListProdi.add(jButton4);
-        jButton4.setBounds(50, 380, 69, 23);
-
-        tabelJudul.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-
-            },
-            new String [] {
-                "Nim", "Nama", "judul", "Deskripsi", "tgl. Pengajuan", "Acc Dosen", "Ket.", "Acc Prodi", "Ket."
-            }
-        ));
-        jScrollPane1.setViewportView(tabelJudul);
-
-        ListProdi.add(jScrollPane1);
-        jScrollPane1.setBounds(40, 170, 600, 200);
-
-        jLabel9.setIcon(new javax.swing.ImageIcon("C:\\Users\\yasmine\\Pictures\\backlist.png")); // NOI18N
-        ListProdi.add(jLabel9);
-        jLabel9.setBounds(0, 0, 690, 460);
+        jButton4.setBounds(60, 330, 69, 23);
 
         tabelJudul1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "Nim", "Nama", "judul", "Deskripsi", "tgl. Pengajuan", "Acc Dosen", "Ket.", "Acc Prodi", "Ket."
+                "", "", "", "", "", "", "", "", ""
             }
         ));
         jScrollPane2.setViewportView(tabelJudul1);
 
         ListProdi.add(jScrollPane2);
-        jScrollPane2.setBounds(40, 170, 600, 200);
+        jScrollPane2.setBounds(50, 90, 600, 200);
 
-        getContentPane().add(ListProdi, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, -10, 690, 470));
+        getContentPane().add(ListProdi, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 690, 460));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -190,14 +171,11 @@ public class ListProdi extends javax.swing.JFrame {
     private javax.swing.JButton jButton7;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel9;
     private javax.swing.JLabel jLabeldeskripsi;
     private javax.swing.JLabel jLabeljudul;
-    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTextArea jTextArea1;
     private javax.swing.JTextField jTextField1;
-    private javax.swing.JTable tabelJudul;
     private javax.swing.JTable tabelJudul1;
     // End of variables declaration//GEN-END:variables
 }
