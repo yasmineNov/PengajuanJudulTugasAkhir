@@ -1,28 +1,15 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package GUI;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import Program.*;
-/**
- *
- * @author yasmine
- */
+
+
 public class PengajuanMahasiswa extends javax.swing.JFrame {
 
-    /**
-     * Creates new form PengajuanMahasiswa
-     */
     public PengajuanMahasiswa() {
         initComponents();
-        listMhs.setVisible(true);
-        pengajuan.setVisible(false);
-        
-        //this.setLocationRelativeTo(null);
+  
     }
 
     /**
@@ -34,19 +21,6 @@ public class PengajuanMahasiswa extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        pengajuan = new javax.swing.JPanel();
-        jTextFieldjudul = new javax.swing.JTextField();
-        desfieldArea = new javax.swing.JScrollPane();
-        jTextArea1 = new javax.swing.JTextArea();
-        jLabeltopjudul = new javax.swing.JLabel();
-        jButtonajukan = new javax.swing.JButton();
-        jComboBoxdospem = new javax.swing.JComboBox<>();
-        jButtonback = new javax.swing.JButton();
-        exitButton = new javax.swing.JLabel();
-        jLabeljudul = new javax.swing.JLabel();
-        jLabeldeskripsi = new javax.swing.JLabel();
-        jLabeldospem = new javax.swing.JLabel();
-        background = new javax.swing.JLabel();
         listMhs = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         backto = new javax.swing.JButton();
@@ -58,74 +32,6 @@ public class PengajuanMahasiswa extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        pengajuan.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jTextFieldjudul.setText(" ");
-        jTextFieldjudul.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextFieldjudulActionPerformed(evt);
-            }
-        });
-        pengajuan.add(jTextFieldjudul, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 220, 400, -1));
-
-        jTextArea1.setColumns(20);
-        jTextArea1.setRows(5);
-        desfieldArea.setViewportView(jTextArea1);
-
-        pengajuan.add(desfieldArea, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 250, 400, 120));
-
-        jLabeltopjudul.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
-        jLabeltopjudul.setText("PENGAJUAN JUDUL");
-        pengajuan.add(jLabeltopjudul, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 130, -1, -1));
-
-        jButtonajukan.setBackground(new java.awt.Color(255, 204, 0));
-        jButtonajukan.setText("Ajukan");
-        jButtonajukan.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonajukanActionPerformed(evt);
-            }
-        });
-        pengajuan.add(jButtonajukan, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 380, -1, -1));
-
-        jComboBoxdospem.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Achmad Choiron S.Kom,MT", "Dwi Cahyono S.Kom", "Ratna Nur Tiara S.Kom", "Cempaka Ananggadipa S.Kom" }));
-        pengajuan.add(jComboBoxdospem, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 190, 400, -1));
-
-        jButtonback.setBackground(new java.awt.Color(204, 204, 204));
-        jButtonback.setText("Kembali");
-        jButtonback.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonbackActionPerformed(evt);
-            }
-        });
-        pengajuan.add(jButtonback, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 380, -1, -1));
-
-        exitButton.setFont(new java.awt.Font("Malgun Gothic", 1, 18)); // NOI18N
-        exitButton.setText("X");
-        exitButton.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                exitButtonMouseClicked(evt);
-            }
-        });
-        pengajuan.add(exitButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 30, -1, -1));
-
-        jLabeljudul.setBackground(new java.awt.Color(0, 0, 0));
-        jLabeljudul.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jLabeljudul.setText("Judul                         :");
-        pengajuan.add(jLabeljudul, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 220, -1, -1));
-
-        jLabeldeskripsi.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jLabeldeskripsi.setText("Deskripsi                   :");
-        pengajuan.add(jLabeldeskripsi, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 250, -1, -1));
-
-        jLabeldospem.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jLabeldospem.setText("Dosen Pembimbing :");
-        pengajuan.add(jLabeldospem, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 190, -1, -1));
-
-        background.setIcon(new javax.swing.ImageIcon("C:\\Users\\yasmine\\Pictures\\backlist.png")); // NOI18N
-        pengajuan.add(background, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, -2, 680, 460));
-
-        getContentPane().add(pengajuan, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
         listMhs.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -173,69 +79,17 @@ public class PengajuanMahasiswa extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void exitButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_exitButtonMouseClicked
-       System.exit(0);
-    }//GEN-LAST:event_exitButtonMouseClicked
-
     private void tambahActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tambahActionPerformed
-       pengajuan.setVisible(true);
-        listMhs.setVisible(false);
+      
     }//GEN-LAST:event_tambahActionPerformed
-
-    private void jButtonbackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonbackActionPerformed
-        pengajuan.setVisible(false);
-        listMhs.setVisible(true);
-    }//GEN-LAST:event_jButtonbackActionPerformed
 
     private void backtoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backtoActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_backtoActionPerformed
 
-    private void jButtonajukanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonajukanActionPerformed
-        Judul jdl = new Judul("nim", jTextFieldjudul.getText(), jTextArea1.getText());
-        //jdl.mahasiswadalamtugas.setNim("nim");
-        try {
-            jdl.insertToDatabase();
-        } catch (Exception ex) {
-            Logger.getLogger(PengajuanMahasiswa.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        jTextFieldjudul.setText("");
-        jTextArea1.setText("");
-        dispose();
-    }//GEN-LAST:event_jButtonajukanActionPerformed
-
-    private void jTextFieldjudulActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldjudulActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextFieldjudulActionPerformed
-
-    /**
-     * @param args the command line arguments
-     */
+    
     public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(PengajuanMahasiswa.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(PengajuanMahasiswa.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(PengajuanMahasiswa.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(PengajuanMahasiswa.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
+        
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new PengajuanMahasiswa().setVisible(true);
@@ -245,24 +99,11 @@ public class PengajuanMahasiswa extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel background;
     private javax.swing.JButton backto;
-    private javax.swing.JScrollPane desfieldArea;
-    private javax.swing.JLabel exitButton;
-    private javax.swing.JButton jButtonajukan;
-    private javax.swing.JButton jButtonback;
-    private javax.swing.JComboBox<String> jComboBoxdospem;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabeldeskripsi;
-    private javax.swing.JLabel jLabeldospem;
-    private javax.swing.JLabel jLabeljudul;
-    private javax.swing.JLabel jLabeltopjudul;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextArea jTextArea1;
-    private javax.swing.JTextField jTextFieldjudul;
     private javax.swing.JPanel listMhs;
-    private javax.swing.JPanel pengajuan;
     private javax.swing.JButton save;
     private javax.swing.JTable tabelJudul;
     private javax.swing.JButton tambah;

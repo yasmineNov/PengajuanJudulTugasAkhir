@@ -26,22 +26,13 @@ public class transaksiDosen extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        ListDosen = new javax.swing.JPanel();
-        jLabel5 = new javax.swing.JLabel();
-        jButton3 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        tabelJudul = new javax.swing.JTable();
-        jLabel9 = new javax.swing.JLabel();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        tabelJudul1 = new javax.swing.JTable();
         Detail = new javax.swing.JPanel();
-        desfieldArea = new javax.swing.JScrollPane();
+        deskripsi = new javax.swing.JScrollPane();
         jTextArea1 = new javax.swing.JTextArea();
         jLabeljudul = new javax.swing.JLabel();
         jLabeldeskripsi = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        setujubutton = new javax.swing.JButton();
+        kembali = new javax.swing.JButton();
         jTextField1 = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         BACKGROUND = new javax.swing.JLabel();
@@ -49,59 +40,13 @@ public class transaksiDosen extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
 
-        ListDosen.setLayout(null);
-
-        jLabel5.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
-        jLabel5.setText("List Dosen");
-        jLabel5.setToolTipText("");
-        ListDosen.add(jLabel5);
-        jLabel5.setBounds(300, 120, 130, 30);
-
-        jButton3.setText("Simpan");
-        ListDosen.add(jButton3);
-        jButton3.setBounds(570, 380, 73, 23);
-
-        jButton4.setText("Kembali");
-        ListDosen.add(jButton4);
-        jButton4.setBounds(50, 380, 69, 23);
-
-        tabelJudul.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-
-            },
-            new String [] {
-                "Nim", "Nama", "judul", "Deskripsi", "tgl. Pengajuan", "Acc Dosen", "Ket.", "Acc Prodi", "Ket."
-            }
-        ));
-        jScrollPane1.setViewportView(tabelJudul);
-
-        ListDosen.add(jScrollPane1);
-        jScrollPane1.setBounds(40, 170, 600, 200);
-
-        jLabel9.setIcon(new javax.swing.ImageIcon("C:\\Users\\yasmine\\Pictures\\backlist.png")); // NOI18N
-        ListDosen.add(jLabel9);
-        jLabel9.setBounds(0, 0, 690, 460);
-
-        tabelJudul1.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-
-            },
-            new String [] {
-                "Nim", "Nama", "judul", "Deskripsi", "tgl. Pengajuan", "Acc Dosen", "Ket.", "Acc Prodi", "Ket."
-            }
-        ));
-        jScrollPane2.setViewportView(tabelJudul1);
-
-        ListDosen.add(jScrollPane2);
-        jScrollPane2.setBounds(40, 170, 600, 200);
-
         Detail.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jTextArea1.setColumns(20);
         jTextArea1.setRows(5);
-        desfieldArea.setViewportView(jTextArea1);
+        deskripsi.setViewportView(jTextArea1);
 
-        Detail.add(desfieldArea, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 240, 270, 120));
+        Detail.add(deskripsi, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 240, 340, 120));
 
         jLabeljudul.setBackground(new java.awt.Color(0, 0, 0));
         jLabeljudul.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
@@ -112,21 +57,21 @@ public class transaksiDosen extends javax.swing.JFrame {
         jLabeldeskripsi.setText("Deskripsi                   :");
         Detail.add(jLabeldeskripsi, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 240, -1, -1));
 
-        jButton1.setText("Approve");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        setujubutton.setText("Setuju");
+        setujubutton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                setujubuttonActionPerformed(evt);
             }
         });
-        Detail.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 390, 90, -1));
+        Detail.add(setujubutton, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 390, 90, -1));
 
-        jButton2.setText("Kembali");
-        Detail.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 390, -1, -1));
-        Detail.add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 200, 270, 30));
+        kembali.setText("Kembali");
+        Detail.add(kembali, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 390, -1, -1));
+        Detail.add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 200, 340, 30));
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         jLabel2.setText("Detail Tugas Akhir Mahasiswa");
-        Detail.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 130, -1, -1));
+        Detail.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 140, -1, -1));
 
         BACKGROUND.setFont(new java.awt.Font("Malgun Gothic", 1, 14)); // NOI18N
         BACKGROUND.setIcon(new javax.swing.ImageIcon("C:\\Users\\yasmine\\Pictures\\backlist.png")); // NOI18N
@@ -136,29 +81,19 @@ public class transaksiDosen extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(Detail, javax.swing.GroupLayout.DEFAULT_SIZE, 690, Short.MAX_VALUE)
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(layout.createSequentialGroup()
-                    .addGap(0, 0, Short.MAX_VALUE)
-                    .addComponent(ListDosen, javax.swing.GroupLayout.PREFERRED_SIZE, 690, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(0, 0, Short.MAX_VALUE)))
+            .addComponent(Detail, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(Detail, javax.swing.GroupLayout.DEFAULT_SIZE, 470, Short.MAX_VALUE)
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(layout.createSequentialGroup()
-                    .addGap(0, 0, Short.MAX_VALUE)
-                    .addComponent(ListDosen, javax.swing.GroupLayout.PREFERRED_SIZE, 470, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(0, 0, Short.MAX_VALUE)))
+            .addComponent(Detail, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void setujubuttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_setujubuttonActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_setujubuttonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -198,23 +133,14 @@ public class transaksiDosen extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel BACKGROUND;
     private javax.swing.JPanel Detail;
-    private javax.swing.JPanel ListDosen;
-    private javax.swing.JScrollPane desfieldArea;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
+    private javax.swing.JScrollPane deskripsi;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel9;
     private javax.swing.JLabel jLabeldeskripsi;
     private javax.swing.JLabel jLabeljudul;
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTextArea jTextArea1;
     private javax.swing.JTextField jTextField1;
-    private javax.swing.JTable tabelJudul;
-    private javax.swing.JTable tabelJudul1;
+    private javax.swing.JButton kembali;
+    private javax.swing.JButton setujubutton;
     // End of variables declaration//GEN-END:variables
 
 }

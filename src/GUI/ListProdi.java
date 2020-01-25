@@ -32,17 +32,11 @@ public class ListProdi extends javax.swing.JFrame {
         jTextArea1 = new javax.swing.JTextArea();
         jLabeljudul = new javax.swing.JLabel();
         jLabeldeskripsi = new javax.swing.JLabel();
-        jButton6 = new javax.swing.JButton();
-        jButton7 = new javax.swing.JButton();
+        setujuButton = new javax.swing.JButton();
+        kembaliButton = new javax.swing.JButton();
         jTextField1 = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         BACKGROUND = new javax.swing.JLabel();
-        ListProdi = new javax.swing.JPanel();
-        jLabel5 = new javax.swing.JLabel();
-        jButton3 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        tabelJudul1 = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -53,7 +47,7 @@ public class ListProdi extends javax.swing.JFrame {
         jTextArea1.setRows(5);
         desfieldArea.setViewportView(jTextArea1);
 
-        DetailProdi.add(desfieldArea, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 240, 270, 120));
+        DetailProdi.add(desfieldArea, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 240, 360, 120));
 
         jLabeljudul.setBackground(new java.awt.Color(0, 0, 0));
         jLabeljudul.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
@@ -64,17 +58,17 @@ public class ListProdi extends javax.swing.JFrame {
         jLabeldeskripsi.setText("Deskripsi                   :");
         DetailProdi.add(jLabeldeskripsi, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 240, -1, -1));
 
-        jButton6.setText("Approve");
-        jButton6.addActionListener(new java.awt.event.ActionListener() {
+        setujuButton.setText("Setuju");
+        setujuButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton6ActionPerformed(evt);
+                setujuButtonActionPerformed(evt);
             }
         });
-        DetailProdi.add(jButton6, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 390, 90, -1));
+        DetailProdi.add(setujuButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 380, 90, -1));
 
-        jButton7.setText("Kembali");
-        DetailProdi.add(jButton7, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 390, -1, -1));
-        DetailProdi.add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 200, 270, 30));
+        kembaliButton.setText("Kembali");
+        DetailProdi.add(kembaliButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 370, 80, -1));
+        DetailProdi.add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 200, 360, 30));
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         jLabel2.setText("Detail Tugas Akhir Mahasiswa");
@@ -82,48 +76,16 @@ public class ListProdi extends javax.swing.JFrame {
 
         BACKGROUND.setFont(new java.awt.Font("Malgun Gothic", 1, 14)); // NOI18N
         BACKGROUND.setIcon(new javax.swing.ImageIcon("C:\\Users\\yasmine\\Pictures\\backlist.png")); // NOI18N
-        DetailProdi.add(BACKGROUND, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
+        DetailProdi.add(BACKGROUND, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, -10, -1, -1));
 
         getContentPane().add(DetailProdi, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 0, 0));
-
-        ListProdi.setBackground(new java.awt.Color(153, 204, 255));
-        ListProdi.setLayout(null);
-
-        jLabel5.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
-        jLabel5.setText("Daftar Pengajuan Judul Mahasiswa");
-        jLabel5.setToolTipText("");
-        ListProdi.add(jLabel5);
-        jLabel5.setBounds(140, 30, 440, 30);
-
-        jButton3.setText("Simpan");
-        ListProdi.add(jButton3);
-        jButton3.setBounds(580, 330, 73, 23);
-
-        jButton4.setText("Kembali");
-        ListProdi.add(jButton4);
-        jButton4.setBounds(60, 330, 69, 23);
-
-        tabelJudul1.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-
-            },
-            new String [] {
-                "", "", "", "", "", "", "", "", ""
-            }
-        ));
-        jScrollPane2.setViewportView(tabelJudul1);
-
-        ListProdi.add(jScrollPane2);
-        jScrollPane2.setBounds(50, 90, 600, 200);
-
-        getContentPane().add(ListProdi, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 690, 460));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
+    private void setujuButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_setujuButtonActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton6ActionPerformed
+    }//GEN-LAST:event_setujuButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -163,19 +125,13 @@ public class ListProdi extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel BACKGROUND;
     private javax.swing.JPanel DetailProdi;
-    private javax.swing.JPanel ListProdi;
     private javax.swing.JScrollPane desfieldArea;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
-    private javax.swing.JButton jButton6;
-    private javax.swing.JButton jButton7;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabeldeskripsi;
     private javax.swing.JLabel jLabeljudul;
-    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTextArea jTextArea1;
     private javax.swing.JTextField jTextField1;
-    private javax.swing.JTable tabelJudul1;
+    private javax.swing.JButton kembaliButton;
+    private javax.swing.JButton setujuButton;
     // End of variables declaration//GEN-END:variables
 }
