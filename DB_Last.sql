@@ -123,6 +123,7 @@ alter table Mahasiswa add constraint FK_mhsToProdi foreign key (idProdi)
 create table Login
 (
    idLogin              varchar(254) not null,
-   Password            varchar(254),
+   Password            	varchar(254),
+   typeLogin		varchar(254),
    primary key (idLogin)
 );

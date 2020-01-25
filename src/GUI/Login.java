@@ -45,12 +45,6 @@ public class Login extends javax.swing.JFrame {
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel1.setText("Username");
         getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 180, -1, -1));
-
-        nama.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                namaActionPerformed(evt);
-            }
-        });
         getContentPane().add(nama, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 200, 290, 30));
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
@@ -67,47 +61,55 @@ public class Login extends javax.swing.JFrame {
         jLabel3.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel3.setText("Password");
         getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 240, -1, -1));
-
-        BackgroundLogin.setIcon(new javax.swing.ImageIcon("C:\\Users\\yasmine\\Pictures\\backlogin3.png")); // NOI18N
         getContentPane().add(BackgroundLogin, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
         setSize(new java.awt.Dimension(402, 468));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void namaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_namaActionPerformed
-       
-    }//GEN-LAST:event_namaActionPerformed
-
     private void passwordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_passwordActionPerformed
-        
+        if((nama.getText().toString().equals("")) || (nama.getText() == null)){
+            JOptionPane.showMessageDialog(null, "Masukkan Username");
+        }
+        else
+        {
+            login log = new login().getSingleDatabase(nama.getText());
+            if(log.getIdLogin() == null){
+                JOptionPane.showMessageDialog(null, "Data tidak ditemukan");
+            }
+            else
+            {
+                if(log.getPassword().equals(password.getText())){
+                    switch(log.getTypeLogin()){
+                        case "Dosen" :
+                        {
+                            new transaksiDosen().setVisible(true);
+                            break;
+                        }
+                        case "Prodi" :
+                        {
+                            
+                            break;
+                        }
+                        case "Mahasiswa" :
+                        {
+                            new DetailMhs().setVisible(true);
+                            break;
+                        }
+                        
+                    }
+                    setVisible(false);
+                }
+                else
+                {
+                    JOptionPane.showMessageDialog(null, "Password salah");
+                }
+            }
+        }
     }//GEN-LAST:event_passwordActionPerformed
 
     private void loginButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginButtonActionPerformed
-        new PengajuanMahasiswa().setVisible(true);
         
-//      try {
-//        Connection c = DatabaseMySQL.getConnection();
-//        Statement s = c.createStatement();
-//        String sql = "SELECT * FROM tlogin where username='"+txtUsername.getText() + "' and pass='"+ txtPass
-//            
-//     int baris = 0;
-//     while (r.next()) {
-//     baris = r.getRow();
-//        }
-//            
-//          if (baris ==1) {
-//            JOptionPane.showMessageDialog(null,"Berhasil Login");
-//            dispose();
-//          }else {
-//             JOptionPane.showMessageDialog(null,"Gagal Login");
-//            }
-//            
-//            
-//        } catch (SQLException e) {
-//            
-//        }
-//    }  
     }//GEN-LAST:event_loginButtonActionPerformed
 
     /**

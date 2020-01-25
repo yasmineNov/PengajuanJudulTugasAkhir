@@ -17,6 +17,15 @@ import java.util.ArrayList;
 public class login {
    private String idLogin;
    private String Password;
+   private String typeLogin;
+
+    public String getTypeLogin() {
+        return typeLogin;
+    }
+
+    public void setTypeLogin(String typeLogin) {
+        this.typeLogin = typeLogin;
+    }
    
    public String getIdLogin() {
       return idLogin;
@@ -45,6 +54,7 @@ public class login {
                login log = new login();
                log.setIdLogin(rs.getString("idLogin"));
                log.setPassword(rs.getString("Password"));
+               log.setTypeLogin(rs.getString("typeLogin"));
 
                list.add(log);
            }
@@ -67,6 +77,7 @@ public class login {
             if (rs.next()) {
                 log.setIdLogin(rs.getString("idLogin"));
                 log.setPassword(rs.getString("Password"));
+                log.setTypeLogin(rs.getString("typeLogin"));
             }
             statement.close();
             rs.close();
@@ -77,10 +88,11 @@ public class login {
     
     public void insertToDatabase(){
        try{
-           String query = "INSERT INTO login VALUES (?, ?)";
+           String query = "INSERT INTO login VALUES (?, ?, ?)";
            PreparedStatement statement = DatabaseMySQL.getConnection().prepareStatement(query);
            statement.setString(1, getIdLogin());
            statement.setString(2, getPassword());           
+           statement.setString(3, getTypeLogin());
            statement.execute();
            statement.close();
        }
