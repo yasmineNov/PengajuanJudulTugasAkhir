@@ -10,6 +10,7 @@ import Program.*;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.StringTokenizer;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -20,6 +21,7 @@ public class transaksiDosen extends javax.swing.JFrame {
     private login logi;
     private Dospem dos;
     private Prodi pro;
+    private Mahasiswa maha;
     /** Creates new form transaksiDosen */
     public transaksiDosen() {
         initComponents();
@@ -28,12 +30,8 @@ public class transaksiDosen extends javax.swing.JFrame {
     public transaksiDosen(login log) {
         initComponents();
         logi = log;
-        getJudul();
+        ceklogin(logi.getTypeLogin());
         setujubutton.setVisible(false);
-        if(logi.getTypeLogin().equals("Dosen"))
-            dos = new Dospem().getSingleDatabase(logi.getIdLogin());
-        else
-            pro = new Prodi().getSingleDatabase(Integer.parseInt(logi.getIdLogin()));
     }
     
     /** This method is called from within the constructor to
@@ -65,7 +63,22 @@ public class transaksiDosen extends javax.swing.JFrame {
             new String [] {
                 "Nim", "Nama", "id - judul", "Deskripsi", "tgl. Pengajuan", "Acc Dosen", "Ket.", "Acc Prodi", "Ket."
             }
-        ));
+        ) {
+            Class[] types = new Class [] {
+                java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Boolean.class, java.lang.Object.class, java.lang.Boolean.class, java.lang.Object.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false, false, false, false
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         TBdos.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 TBdosMouseClicked(evt);
@@ -84,6 +97,11 @@ public class transaksiDosen extends javax.swing.JFrame {
         Detail.add(setujubutton, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 390, 90, -1));
 
         kembali.setText("Kembali");
+        kembali.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                kembaliActionPerformed(evt);
+            }
+        });
         Detail.add(kembali, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 390, -1, -1));
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
@@ -111,24 +129,62 @@ public class transaksiDosen extends javax.swing.JFrame {
         // TODO add your handling code here:
         String teks = TBdos.getValueAt(TBdos.getSelectedRow(), 2).toString();
         StringTokenizer token = new StringTokenizer(teks, " - ");
+        int idjudul = Integer.parseInt(token.nextToken());
         if(logi.getTypeLogin().equals("Dosen")){
-            KeputusanDospem Kd = new KeputusanDospem(true);
-            Kd.insertToDatabase();
+            KeputusanDospem KdA = new KeputusanDospem(dos.getNpp(), idjudul, true);
+            KdA.insertToDatabase();
+            JOptionPane.showMessageDialog(null, "Judul telah disetujui");
         }
         else{
-            KeputusanProdi Kp = new KeputusanProdi(true);
-            Kp.insertToDatabase();
+            
+            try{
+                boolean a = (boolean) TBdos.getValueAt(TBdos.getSelectedRow(), 5);
+                KeputusanProdi KpA = new KeputusanProdi(pro.getIdProdi(), idjudul, true);
+                KpA.insertToDatabase();
+                JOptionPane.showMessageDialog(null, "Judul telah disetujui");
+            }
+            catch(Exception e){
+                JOptionPane.showMessageDialog(null, "Dosen belum ACC judul");
+            }
+            
         }
+        ceklogin(logi.getTypeLogin());
     }//GEN-LAST:event_setujubuttonActionPerformed
 
     private void TBdosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TBdosMouseClicked
         // TODO add your handling code here:
+        switch(logi.getTypeLogin()){
+            case "Mahasiswa" :
+            {
+                
+                break;
+            }
+            case "Dosen" :
+            {
+                dos = new Dospem().getSingleDatabase(logi.getIdLogin());
+                break;
+            }
+            case "Prodi" :
+            {
+                pro = new Prodi().getSingleDatabase(Integer.parseInt(logi.getIdLogin()));
+                break;
+            }
+        }
         if(TBdos.getValueAt(TBdos.getSelectedRow(), (logi.getTypeLogin().equals("Dosen"))? 5 : 7) != null){
             setujubutton.setVisible(false);
         }
         else
             setujubutton.setVisible(true);
     }//GEN-LAST:event_TBdosMouseClicked
+
+    private void kembaliActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_kembaliActionPerformed
+        // TODO add your handling code here:
+        if(logi.getTypeLogin().toString().equals("Mahasiswa"))
+            new DetailMhs(maha).setVisible(true);
+        else
+            new Login().setVisible(true);
+        setVisible(false);
+    }//GEN-LAST:event_kembaliActionPerformed
 
     /**
      * @param args the command line arguments
@@ -164,50 +220,193 @@ public class transaksiDosen extends javax.swing.JFrame {
             }
         });
     }
-    public void getJudul(){
+    public void getJudulProdi(){
         DefaultTableModel model = (DefaultTableModel) TBdos.getModel();
         model.setRowCount(0);
-        Object[] atribut = new Object[7];
         ArrayList<Judul> listJudul = new Judul().getAllDatabase();
         Iterator<Judul> tiapJudul = listJudul.iterator();
         while(tiapJudul.hasNext()){
+            Object[] atribut = new Object[9];
             Judul jud = tiapJudul.next();
-            
             KeputusanDospem Kd = new KeputusanDospem();
-            ArrayList<KeputusanDospem> listKeputusanDospem = new KeputusanDospem().getAllDatabase();
-            Iterator<KeputusanDospem> tiapKeputusanDospem = listKeputusanDospem.iterator();
-            while(tiapKeputusanDospem.hasNext()){
-                KeputusanDospem KdTemp = tiapKeputusanDospem.next();
-                if(jud.getIdJudul() == KdTemp.putusanDosen.getIdJudul()){
-                    Kd = KdTemp;
-                    break;
+                ArrayList<KeputusanDospem> listKeputusanDospem = new KeputusanDospem().getAllDatabase();
+                Iterator<KeputusanDospem> tiapKeputusanDospem = listKeputusanDospem.iterator();
+                while(tiapKeputusanDospem.hasNext()){
+                    KeputusanDospem KdTemp = tiapKeputusanDospem.next();
+                    if(jud.getIdJudul() == KdTemp.putusanDosen.getIdJudul()){
+                        Kd = KdTemp;
+                        break;
+                    }
                 }
-            }
-            
-            KeputusanProdi Kp = new KeputusanProdi();
-            ArrayList<KeputusanProdi> listKeputusanProdi = new KeputusanProdi().getAllDatabase();
-            Iterator<KeputusanProdi> tiapKeputusanProdi = listKeputusanProdi.iterator();
-            while(tiapKeputusanProdi.hasNext()){
-                KeputusanProdi KpTemp = tiapKeputusanProdi.next();
-                if(jud.getIdJudul() == KpTemp.putusanJdl.getIdJudul()){
-                    Kp = KpTemp;
-                    break;
+                
+                KeputusanProdi Kp = new KeputusanProdi();
+                ArrayList<KeputusanProdi> listKeputusanProdi = new KeputusanProdi().getAllDatabase();
+                Iterator<KeputusanProdi> tiapKeputusanProdi = listKeputusanProdi.iterator();
+                while(tiapKeputusanProdi.hasNext()){
+                    KeputusanProdi KpTemp = tiapKeputusanProdi.next();
+                    if(jud.getIdJudul() == KpTemp.putusanJdl.getIdJudul()){
+                        Kp = KpTemp;
+                        break;
+                    }
                 }
-            }
+                atribut[0] = jud.mahasiswadalamtugas.getNim();
+                atribut[1] = jud.mahasiswadalamtugas.getNama();
+                atribut[2] = jud.getIdJudul()+ " - " + jud.getNamaJudul();
+                atribut[3] = jud.getDeskripsi();
+                atribut[4] = jud.getTglPengajuan();
+                if(Kd.getStatusDospem() != null)
+                {
+                    atribut[5] = Kd.getStatusDospem();
+                    atribut[6] = Kd.getTglAccDosen();
+                }
+                if(Kp.getStatusProdi() != null)
+                {
+                    atribut[7] = Kp.getStatusProdi();
+                    atribut[8] = Kp.getTglAccProdi();
+                }
+                model.addRow(atribut);
             
-            atribut[0] = jud.mahasiswadalamtugas.getNim();
-            atribut[1] = jud.mahasiswadalamtugas.getNama();
-            atribut[2] = jud.getIdJudul()+ " - " + jud.getNamaJudul();
-            atribut[3] = jud.getDeskripsi();
-            atribut[4] = jud.getTglPengajuan();
-            atribut[5] = Kd.getStatusDospem();
-            atribut[6] = Kd.getTglAccDosen();
-            atribut[7] = Kp.getStatusProdi();
-            atribut[8] = Kp.getTglAccProdi();
-           
-            model.addRow(atribut);
+            
         }
         TBdos.setModel(model);
+    }
+    
+    public void getJudulMahasiswa(){
+        DefaultTableModel model = (DefaultTableModel) TBdos.getModel();
+        model.setRowCount(0);
+        ArrayList<Judul> listJudul = new Judul().getAllDatabase();
+        Iterator<Judul> tiapJudul = listJudul.iterator();
+        while(tiapJudul.hasNext()){
+            Object[] atribut = new Object[9];
+            Judul jud = tiapJudul.next();
+            try{
+                    if (maha.getNim().equals(jud.mahasiswadalamtugas.getNim())){
+                        KeputusanDospem Kd = new KeputusanDospem();
+                        ArrayList<KeputusanDospem> listKeputusanDospem = new KeputusanDospem().getAllDatabase();
+                        Iterator<KeputusanDospem> tiapKeputusanDospem = listKeputusanDospem.iterator();
+                        while(tiapKeputusanDospem.hasNext()){
+                            KeputusanDospem KdTemp = tiapKeputusanDospem.next();
+                            if(jud.getIdJudul() == KdTemp.putusanDosen.getIdJudul()){
+                                Kd = KdTemp;
+                                break;
+                            }
+                        }
+
+                        KeputusanProdi Kp = new KeputusanProdi();
+                        ArrayList<KeputusanProdi> listKeputusanProdi = new KeputusanProdi().getAllDatabase();
+                        Iterator<KeputusanProdi> tiapKeputusanProdi = listKeputusanProdi.iterator();
+                        while(tiapKeputusanProdi.hasNext()){
+                            KeputusanProdi KpTemp = tiapKeputusanProdi.next();
+                            if(jud.getIdJudul() == KpTemp.putusanJdl.getIdJudul()){
+                                Kp = KpTemp;
+                                break;
+                            }
+                        }
+
+                        atribut[0] = jud.mahasiswadalamtugas.getNim();
+                        atribut[1] = jud.mahasiswadalamtugas.getNama();
+                        atribut[2] = jud.getIdJudul()+ " - " + jud.getNamaJudul();
+                        atribut[3] = jud.getDeskripsi();
+                        atribut[4] = jud.getTglPengajuan();
+                        if(Kd.getStatusDospem() != null)
+                        {
+                            atribut[5] = Kd.getStatusDospem();
+                            atribut[6] = Kd.getTglAccDosen();
+                        }
+                        if(Kp.getStatusProdi() != null)
+                        {
+                            atribut[7] = Kp.getStatusProdi();
+                            atribut[8] = Kp.getTglAccProdi();
+                        }
+
+                        model.addRow(atribut);
+                    }
+                }
+                catch(Exception E){
+                    
+                }
+        }
+        TBdos.setModel(model);
+    }
+    
+    public void getJudulDosen(){
+        DefaultTableModel model = (DefaultTableModel) TBdos.getModel();
+        model.setRowCount(0);
+        ArrayList<Judul> listJudul = new Judul().getAllDatabase();
+        Iterator<Judul> tiapJudul = listJudul.iterator();
+        while(tiapJudul.hasNext()){
+            Object[] atribut = new Object[9];
+            Judul jud = tiapJudul.next();
+            try{
+                    if (dos.getNpp().equals(jud.dosendalamtugas.getNpp())){
+                        KeputusanDospem Kd = new KeputusanDospem();
+                        ArrayList<KeputusanDospem> listKeputusanDospem = new KeputusanDospem().getAllDatabase();
+                        Iterator<KeputusanDospem> tiapKeputusanDospem = listKeputusanDospem.iterator();
+                        while(tiapKeputusanDospem.hasNext()){
+                            KeputusanDospem KdTemp = tiapKeputusanDospem.next();
+                            if(jud.getIdJudul() == KdTemp.putusanDosen.getIdJudul()){
+                                Kd = KdTemp;
+                                break;
+                            }
+                        }
+
+                        KeputusanProdi Kp = new KeputusanProdi();
+                        ArrayList<KeputusanProdi> listKeputusanProdi = new KeputusanProdi().getAllDatabase();
+                        Iterator<KeputusanProdi> tiapKeputusanProdi = listKeputusanProdi.iterator();
+                        while(tiapKeputusanProdi.hasNext()){
+                            KeputusanProdi KpTemp = tiapKeputusanProdi.next();
+                            if(jud.getIdJudul() == KpTemp.putusanJdl.getIdJudul()){
+                                Kp = KpTemp;
+                                break;
+                            }
+                        }
+
+                        atribut[0] = jud.mahasiswadalamtugas.getNim();
+                        atribut[1] = jud.mahasiswadalamtugas.getNama();
+                        atribut[2] = jud.getIdJudul()+ " - " + jud.getNamaJudul();
+                        atribut[3] = jud.getDeskripsi();
+                        atribut[4] = jud.getTglPengajuan();
+                        if(Kd.getStatusDospem() != null)
+                        {
+                            atribut[5] = Kd.getStatusDospem();
+                            atribut[6] = Kd.getTglAccDosen();
+                        }
+                        if(Kp.getStatusProdi() != null)
+                        {
+                            atribut[7] = Kp.getStatusProdi();
+                            atribut[8] = Kp.getTglAccProdi();
+                        }
+
+                        model.addRow(atribut);
+                    }
+                }
+                catch(Exception E){
+                    
+                }
+        }
+        TBdos.setModel(model);
+    }
+    public void ceklogin(String tipe){
+        switch(tipe){
+            case "Mahasiswa" :
+            {
+                maha = new Mahasiswa().getSingleDatabase(logi.getIdLogin());
+                getJudulMahasiswa();
+                break;
+            }
+            case "Dosen" :
+            {
+                dos = new Dospem().getSingleDatabase(logi.getIdLogin());
+                getJudulDosen();
+                break;
+            }
+            case "Prodi" :
+            {
+                pro = new Prodi().getSingleDatabase(Integer.parseInt(logi.getIdLogin()));
+                getJudulProdi();
+                break;
+            }
+        }
     }
     
     // Variables declaration - do not modify//GEN-BEGIN:variables

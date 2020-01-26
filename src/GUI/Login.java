@@ -109,7 +109,7 @@ public class Login extends javax.swing.JFrame {
     }//GEN-LAST:event_passwordActionPerformed
 
     private void loginButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginButtonActionPerformed
-        
+        passwordActionPerformed(evt);
     }//GEN-LAST:event_loginButtonActionPerformed
 
     /**

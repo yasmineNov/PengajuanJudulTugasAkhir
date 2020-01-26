@@ -1,7 +1,11 @@
 package GUI;
 
 import Program.*;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.Iterator;
+import java.util.StringTokenizer;
+import javax.swing.JOptionPane;
 
 public class DetailMhs extends javax.swing.JFrame {
     Mahasiswa mahasiswa;
@@ -15,6 +19,7 @@ public class DetailMhs extends javax.swing.JFrame {
     public DetailMhs(Mahasiswa maha) {
         initComponents();
         mahasiswa = maha;
+        setListDosenPemb();
     }
     
     /**
@@ -38,6 +43,7 @@ public class DetailMhs extends javax.swing.JFrame {
         backButton = new javax.swing.JButton();
         jLabeljudul = new javax.swing.JLabel();
         jLabeldeskripsi = new javax.swing.JLabel();
+        listjudul = new javax.swing.JButton();
         background = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -89,6 +95,14 @@ public class DetailMhs extends javax.swing.JFrame {
         jLabeldeskripsi.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabeldeskripsi.setText("Deskripsi                   :");
         pengajuan.add(jLabeldeskripsi, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 240, -1, -1));
+
+        listjudul.setText("Lihat List Judul");
+        listjudul.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                listjudulActionPerformed(evt);
+            }
+        });
+        pengajuan.add(listjudul, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 380, -1, -1));
         pengajuan.add(background, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 680, 460));
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -127,13 +141,33 @@ public class DetailMhs extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void ajukanButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ajukanButtonActionPerformed
-        Judul jud = new Judul(mahasiswa.getNim(), judulnama.getText(), deskripsides.getText(), new Date());
-        jud.insertToDatabase();
+        if(dosenPembimbing.getSelectedItem().toString().equals("- Dosen -"))
+            JOptionPane.showMessageDialog(null, "Silahkan pilih dosen terlebih dahulu");
+        else
+        {
+            String teks = dosenPembimbing.getSelectedItem().toString();
+        
+            StringTokenizer token = new StringTokenizer(teks, " - ");
+
+            Judul jud = new Judul(mahasiswa.getNim(), token.nextToken(), judulnama.getText(), deskripsides.getText(), new Date());
+            jud.insertToDatabase();
+            JOptionPane.showMessageDialog(null, "Data berhasil disimpan");
+            judulnama.setText("");
+            deskripsides.setText("");
+            dosenPembimbing.setSelectedIndex(0);
+        }
     }//GEN-LAST:event_ajukanButtonActionPerformed
 
     private void backButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backButtonActionPerformed
-        
+        new Login().setVisible(true);
+        setVisible(false);
     }//GEN-LAST:event_backButtonActionPerformed
+
+    private void listjudulActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_listjudulActionPerformed
+        // TODO add your handling code here:
+        new transaksiDosen(new login().getSingleDatabase(mahasiswa.getNim())).setVisible(true);
+        setVisible(false);
+    }//GEN-LAST:event_listjudulActionPerformed
 
     /**
      * @param args the command line arguments
@@ -170,6 +204,17 @@ public class DetailMhs extends javax.swing.JFrame {
         });
     }
 
+    public void setListDosenPemb(){
+        dosenPembimbing.removeAllItems();
+        dosenPembimbing.addItem("- Dosen -");
+        ArrayList<Dospem> listDosen = new Dospem().getAllDatabase();
+        Iterator<Dospem> tiapDosen = listDosen.iterator();
+        while(tiapDosen.hasNext()){
+            Dospem dos = tiapDosen.next();
+            dosenPembimbing.addItem(dos.getNpp() + " - " + dos.getNama());
+        }
+    }
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton ajukanButton;
     private javax.swing.JButton backButton;
@@ -183,6 +228,7 @@ public class DetailMhs extends javax.swing.JFrame {
     private javax.swing.JLabel jLabeltopjudul;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JTextField judulnama;
+    private javax.swing.JButton listjudul;
     private javax.swing.JPanel pengajuan;
     // End of variables declaration//GEN-END:variables
 }

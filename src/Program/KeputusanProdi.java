@@ -23,9 +23,11 @@ public class KeputusanProdi {
        
    }
    
-   public KeputusanProdi(Boolean statusDospem){
+   public KeputusanProdi(int idProdi, int idJudul, Boolean statusProdi){
        setIdKeputusanProdi(getAllDatabase().size() + 1);
-       setStatusProdi(statusDospem);
+       prodi = new Prodi().getSingleDatabase(idProdi);
+       putusanJdl = new Judul().getSingleDatabase(idJudul);
+       setStatusProdi(statusProdi);
        setTglAccProdi(new Date());
    }
    
@@ -118,7 +120,8 @@ public class KeputusanProdi {
            statement.setInt(2, prodi.getIdProdi());           
            statement.setInt(3, putusanJdl.getIdJudul());           
            statement.setBoolean(4, getStatusProdi());
-           statement.setDate(5, (java.sql.Date) getTglAccProdi());
+           java.sql.Date sqlDate = new java.sql.Date(getTglAccProdi().getTime());
+           statement.setDate(5, sqlDate);
            statement.execute();
            statement.close();
        }

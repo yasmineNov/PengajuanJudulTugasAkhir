@@ -40,8 +40,10 @@ create table Judul
 (
    idJudul              int not null,
    nim                  varchar(254) not null,
+   npp			varchar(254) not null,
    namaJudul            varchar(254),
    deskripsi            varchar(254),
+   TglPengajuan		Date,
    primary key (idJudul)
 );
 
@@ -102,6 +104,9 @@ create table Prodi
 alter table Judul add constraint FK_judulMhs foreign key (nim)
       references Mahasiswa (nim) on delete restrict on update restrict;
 
+alter table Judul add constraint FK_dosenToJudul foreign key (npp)
+      references Dospem (npp) on delete restrict on update restrict;
+
 alter table KeputusanDospem add constraint FK_accDospem foreign key (npp)
       references Dospem (npp) on delete restrict on update restrict;
 
@@ -116,6 +121,8 @@ alter table KeputusanProdi add constraint FK_accProdi foreign key (idProdi)
 
 alter table Mahasiswa add constraint FK_mhsToProdi foreign key (idProdi)
       references Prodi (idProdi) on delete restrict on update restrict;
+
+
 
 /*==============================================================*/
 /* Table: Login                                                 */

@@ -20,7 +20,7 @@ public class DatabaseMySQL {
                 //String timezone = "?usetimezone=true&serverTimezone=UTC";
                 String namaDB, user, pass;
 
-                namaDB = "last";//sesuaikan dengan nama database di mySQL
+                namaDB = "last2";//sesuaikan dengan nama database di mySQL
                 user = "root";//sesuaikan dengan username di mySQL
                 pass = "";//sesuaikan dengan password di mySQL default ("")
        

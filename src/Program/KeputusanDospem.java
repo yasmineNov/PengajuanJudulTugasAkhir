@@ -24,8 +24,10 @@ public class KeputusanDospem {
        
    }
    
-   public KeputusanDospem(Boolean statusDospem){
+   public KeputusanDospem(String npp,int idJudul, Boolean statusDospem){
        setIdKeputusanDospem(getAllDatabase().size() + 1);
+       dospem = new Dospem().getSingleDatabase(npp);
+       putusanDosen = new Judul().getSingleDatabase(idJudul);
        setStatusDospem(statusDospem);
        setTglAccDosen(new Date());
    }
@@ -119,7 +121,8 @@ public class KeputusanDospem {
            statement.setString(2, dospem.getNpp());           
            statement.setInt(3, putusanDosen.getIdJudul());           
            statement.setBoolean(4, getStatusDospem());
-           statement.setDate(5, (java.sql.Date) getTglAccDosen());
+           java.sql.Date sqlDate = new java.sql.Date(getTglAccDosen().getTime());
+           statement.setDate(5, sqlDate);
            statement.execute();
            statement.close();
        }

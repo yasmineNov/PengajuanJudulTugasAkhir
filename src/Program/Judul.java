@@ -26,6 +26,8 @@ public class Judul {
    /** @pdRoleInfo migr=no name=Mahasiswa assc=judulMhs mult=1..1 side=A */
    public Mahasiswa mahasiswadalamtugas;
    
+   public Dospem dosendalamtugas;
+   
    /** @pdOid 412aef13-04af-4105-927e-6df78766ccd9 */
    public int getIdJudul() {
       return idJudul;
@@ -75,10 +77,11 @@ public class Judul {
       // TODO: implement
    }
    
-   public Judul(String nim, String NamaJudul, String Deskripsi, Date TglPengajuan) {
+   public Judul(String nim, String npp, String NamaJudul, String Deskripsi, Date TglPengajuan) {
       // TODO: implement
       autoInsertId();
       mahasiswadalamtugas = new Mahasiswa().getSingleDatabase(nim);
+      dosendalamtugas = new Dospem().getSingleDatabase(npp);
       setNamaJudul(NamaJudul);
       setDeskripsi(Deskripsi);
       setTglPengajuan(TglPengajuan);
@@ -96,6 +99,7 @@ public class Judul {
                Judul jud = new Judul();
                jud.setIdJudul(rs.getInt("idJudul"));
                jud.mahasiswadalamtugas = new Mahasiswa().getSingleDatabase(rs.getString("nim"));
+               jud.dosendalamtugas = new Dospem().getSingleDatabase(rs.getString("npp"));
 
                jud.setNamaJudul(rs.getString("namaJudul"));
                jud.setDeskripsi(rs.getString("deskripsi"));
@@ -125,6 +129,7 @@ public class Judul {
                Judul jud = new Judul();
                jud.setIdJudul(rs.getInt("idJudul"));
                jud.mahasiswadalamtugas = new Mahasiswa().getSingleDatabase(rs.getString("nim"));
+               jud.dosendalamtugas = new Dospem().getSingleDatabase(rs.getString("npp"));
                jud.setNamaJudul(rs.getString("namaJudul"));
                jud.setDeskripsi(rs.getString("deskripsi"));
                jud.setTglPengajuan(rs.getDate("TglPengajuan"));
@@ -148,6 +153,7 @@ public class Judul {
            if(rs.next()){
                jud.setIdJudul(rs.getInt("idJudul"));
                jud.mahasiswadalamtugas = new Mahasiswa().getSingleDatabase(rs.getString("nim"));
+               jud.dosendalamtugas = new Dospem().getSingleDatabase(rs.getString("npp"));
                jud.setNamaJudul(rs.getString("namaJudul"));
                jud.setDeskripsi(rs.getString("deskripsi"));
                jud.setTglPengajuan(rs.getDate("TglPengajuan"));
@@ -162,15 +168,16 @@ public class Judul {
 
    public void insertToDatabase(){
        try{
-           String query = "INSERT INTO judul VALUES (?, ?, ?, ?)";
+           String query = "INSERT INTO judul VALUES (?, ?, ?, ?, ?, ?)";
            PreparedStatement statement = DatabaseMySQL.getConnection().prepareStatement(query);
 
            statement.setInt(1, getIdJudul());
            statement.setString(2, mahasiswadalamtugas.getNim());
-           statement.setString(3, getNamaJudul());
-           statement.setString(4, getDeskripsi());
+           statement.setString(3, dosendalamtugas.getNpp());
+           statement.setString(4, getNamaJudul());
+           statement.setString(5, getDeskripsi());
            java.sql.Date sqlDate = new java.sql.Date(getTglPengajuan().getTime());
-           statement.setDate(5, sqlDate);
+           statement.setDate(6, sqlDate);
            statement.execute();
            statement.close();
        }
